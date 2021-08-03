@@ -53,6 +53,8 @@ pub mod streaming {
         let cpi_ctx = CpiContext::from(&*ctx.accounts).with_signer(signer);
         token::transfer(cpi_ctx, amount)?;
 
+        ctx.accounts.streaming.outstanding -= amount;
+
         Ok(())
     }
 }
